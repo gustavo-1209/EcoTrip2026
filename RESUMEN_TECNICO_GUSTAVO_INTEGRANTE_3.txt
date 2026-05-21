@@ -1,0 +1,116 @@
+RESUMEN TÉCNICO – PROYECTO ECOTRIP 2026
+Parte trabajada por: Gustavo Benalcazar
+Rol: Integrante 3 – Desarrollador UI: Pantalla de Formulario
+Fecha: 21/05/2026
+
+============================================================
+1. CONTEXTO DE LA PARTE TRABAJADA
+============================================================
+
+Se continuó el proyecto EcoTrip 2026 desde la versión entregada por William, donde ya existían el ViewModel, SavedStateHandle, DataStore, rutas tipadas y el NavHost base.
+
+La responsabilidad de esta parte fue reemplazar el formulario temporal que estaba dentro de EcoTripNavHost.kt por una pantalla independiente, declarativa y más completa usando Jetpack Compose con Material Design 3.
+
+============================================================
+2. ARCHIVOS CREADOS
+============================================================
+
+2.1. FormularioScreen.kt
+
+Ruta:
+app/src/main/java/com/example/ecotrip2026/ui/screens/FormularioScreen.kt
+
+Contenido implementado:
+
+- Pantalla FormularioScreen usando Scaffold.
+- Barra superior con TopAppBar.
+- Botón de acción flotante con ExtendedFloatingActionButton.
+- Campos de entrada con OutlinedTextField:
+  - Nombre del viajero.
+  - Destino.
+  - Días de duración.
+- Selector de transporte con RadioButton:
+  - Tren.
+  - Bus.
+  - Bicicleta.
+  - Auto compartido.
+- Interruptor de preferencia baja en carbono con Switch.
+- Visualización de mensaje de error del ViewModel.
+- Uso de MaterialTheme.colorScheme para mantener compatibilidad visual con Material Design 3.
+
+============================================================
+3. ARCHIVOS MODIFICADOS
+============================================================
+
+3.1. EcoTripNavHost.kt
+
+Ruta:
+app/src/main/java/com/example/ecotrip2026/navigation/EcoTripNavHost.kt
+
+Cambios realizados:
+
+- Se eliminó la pantalla temporal del formulario que estaba escrita directamente dentro del NavHost.
+- Se conectó el nuevo componente FormularioScreen.
+- Se mantuvo la conexión con EcoTripViewModel.
+- Se conservaron las funciones existentes:
+  - actualizarNombre
+  - actualizarDestino
+  - actualizarDiasDuracion
+  - actualizarTipoTransporte
+  - actualizarHuellaCarbono
+  - validarFormulario
+- La navegación hacia ResumenRoute se ejecuta solo cuando validarFormulario() devuelve true.
+
+============================================================
+4. VALIDACIÓN Y RESILIENCIA
+============================================================
+
+La validación principal sigue centralizada en EcoTripViewModel, por lo que la UI no controla directamente la lógica del formulario.
+
+La pantalla observa uiState desde el ViewModel y envía eventos mediante callbacks. Esto permite que los datos se mantengan durante la rotación de pantalla porque el estado temporal está respaldado por SavedStateHandle.
+
+Además, los campos de nombre, transporte y preferencia de huella de carbono siguen conectados con DataStore mediante el ViewModel, por lo que se conserva la persistencia global ya implementada por William.
+
+============================================================
+5. COMMIT SUGERIDO
+============================================================
+
+git add .
+git commit -m "feat: compose ui layout with material design 3"
+git push -u origin gustavo-formulario-ui
+
+============================================================
+6. QUÉ DEBE HACER LA SIGUIENTE PERSONA
+============================================================
+
+Matías debe continuar con la pantalla de resumen.
+
+Archivo sugerido:
+app/src/main/java/com/example/ecotrip2026/ui/screens/ResumenScreen.kt
+
+Recomendaciones para Matías:
+
+- Reemplazar la pantalla temporal de resumen que aún está dentro de EcoTripNavHost.kt.
+- Usar Scaffold, TopAppBar y MaterialTheme.colorScheme.
+- Mantener la lectura segura de datos desde ResumenRoute.
+- Programar el botón de retorno usando popUpTo y launchSingleTop.
+- Revisar si desea extender ResumenRoute para incluir destino y días de duración, ya que actualmente la ruta solo recibe nombre, tipoTransporte y huellaCarbonoActiva.
+
+============================================================
+7. ESTADO FINAL DE ESTA PARTE
+============================================================
+
+La pantalla de formulario quedó separada, más ordenada y conectada al ViewModel existente.
+
+Se cumple la responsabilidad del Integrante 3:
+
+- Interfaz declarativa en Jetpack Compose.
+- Material Design 3.
+- Scaffold.
+- TopAppBar.
+- FloatingActionButton.
+- Campos de entrada.
+- Selector de transporte.
+- Switch de huella de carbono.
+- Validación antes de navegar.
+- Soporte de rotación mediante el estado manejado por ViewModel y SavedStateHandle.

@@ -1,0 +1,63 @@
+COMANDOS PARA CONTINUAR COMO INTEGRANTE 3 – ECOTRIP 2026
+
+1. Clonar el repositorio actualizado
+
+git clone https://github.com/Wfcmg/EcoTrip2026-William.git
+cd EcoTrip2026-William
+
+2. Crear la rama de trabajo
+
+git checkout -b gustavo-formulario-ui
+
+3. Abrir el proyecto en Android Studio
+
+File > Open > seleccionar la carpeta EcoTrip2026-William
+Esperar la sincronización de Gradle.
+
+4. Verificar que el proyecto compile
+
+./gradlew.bat :app:assembleDebug
+
+5. Crear la pantalla del formulario
+
+Crear la carpeta:
+app/src/main/java/com/example/ecotrip2026/ui/screens
+
+Crear el archivo:
+FormularioScreen.kt
+
+6. Reemplazar el formulario temporal en EcoTripNavHost.kt
+
+Importar:
+import com.example.ecotrip2026.ui.screens.FormularioScreen
+
+Dentro de composable<FormularioRoute>, llamar a FormularioScreen y mantener la conexión con el ViewModel.
+
+7. Probar en el emulador
+
+- Abrir la aplicación.
+- Escribir nombre, destino y días.
+- Seleccionar transporte.
+- Activar o desactivar la huella de carbono.
+- Rotar la pantalla.
+- Confirmar que los datos no se pierdan.
+- Presionar el botón flotante Ir.
+- Confirmar que solo navegue cuando el formulario sea válido.
+
+8. Revisar cambios en Git
+
+git status
+git diff
+
+9. Guardar cambios en commit
+
+git add .
+git commit -m "feat: compose ui layout with material design 3"
+
+10. Subir la rama al repositorio
+
+git push -u origin gustavo-formulario-ui
+
+11. Avisar al equipo
+
+Indicar que la pantalla de formulario ya quedó separada en ui/screens/FormularioScreen.kt y conectada al ViewModel.
