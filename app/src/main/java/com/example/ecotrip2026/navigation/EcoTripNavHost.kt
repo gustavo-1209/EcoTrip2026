@@ -18,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.ecotrip2026.ui.screens.FormularioScreen
+import com.example.ecotrip2026.ui.screens.ResumenScreen
 import com.example.ecotrip2026.viewmodel.EcoTripViewModel
 import com.example.ecotrip2026.viewmodel.EcoTripViewModelFactory
 
@@ -46,6 +47,8 @@ fun EcoTripNavHost(
                         navController.navigate(
                             ResumenRoute(
                                 nombre = estadoActual.nombre.trim(),
+                                destino = estadoActual.destino.trim(),
+                                diasDuracion = estadoActual.diasDuracion.toIntOrNull() ?: 0,
                                 tipoTransporte = estadoActual.tipoTransporte,
                                 huellaCarbonoActiva = estadoActual.huellaCarbonoActiva
                             )
@@ -60,36 +63,21 @@ fun EcoTripNavHost(
         composable<ResumenRoute> { backStackEntry ->
             val datos = backStackEntry.toRoute<ResumenRoute>()
 
-            Scaffold { padding ->
-                Column(
-                    modifier = Modifier
-                        .padding(padding)
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Text(text = "Resumen del viaje")
-                    Text(text = "Viajero: ${datos.nombre}")
-                    Text(text = "Transporte: ${datos.tipoTransporte}")
-                    Text(
-                        text = "Ruta baja en carbono: ${
-                            if (datos.huellaCarbonoActiva) "Sí" else "No"
-                        }"
-                    )
-
-                    Button(
-                        onClick = {
-                            navController.navigate(FormularioRoute) {
-                                popUpTo<FormularioRoute> {
-                                    inclusive = false
-                                }
-                                launchSingleTop = true
-                            }
+            ResumenScreen(
+                nombre = datos.nombre,
+                destino = datos.destino,
+                diasDuracion = datos.diasDuracion,
+                tipoTransporte = datos.tipoTransporte,
+                huellaCarbonoActiva = datos.huellaCarbonoActiva,
+                onVolver = {
+                    navController.navigate(FormularioRoute) {
+                        popUpTo<FormularioRoute> {
+                            inclusive = false
                         }
-                    ) {
-                        Text("Volver al formulario")
+                        launchSingleTop = true
                     }
                 }
-            }
+            )
         }
     }
 }
