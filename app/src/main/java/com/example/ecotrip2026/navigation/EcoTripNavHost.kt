@@ -22,6 +22,8 @@ import com.example.ecotrip2026.ui.screens.ResumenScreen
 import com.example.ecotrip2026.viewmodel.EcoTripViewModel
 import com.example.ecotrip2026.viewmodel.EcoTripViewModelFactory
 
+// Configuración principal de la navegación de la app (NavHost)
+// Aquí se decide qué pantalla se muestra y cómo viajar entre ellas.
 @Composable
 fun EcoTripNavHost(
     navController: NavHostController = rememberNavController(),
