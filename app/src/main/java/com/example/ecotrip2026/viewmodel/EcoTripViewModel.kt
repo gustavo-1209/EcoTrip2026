@@ -1,4 +1,4 @@
-﻿package com.example.ecotrip2026.viewmodel
+package com.example.ecotrip2026.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -64,9 +64,8 @@ class EcoTripViewModel(
     }
 
     fun actualizarDiasDuracion(valor: String) {
-        val valorLimpio = valor.filter { it.isDigit() }
-        _uiState.value = _uiState.value.copy(diasDuracion = valorLimpio, mensajeError = null)
-        savedStateHandle["diasDuracion"] = valorLimpio
+        _uiState.value = _uiState.value.copy(diasDuracion = valor, mensajeError = null)
+        savedStateHandle["diasDuracion"] = valor
     }
 
     fun actualizarTipoTransporte(valor: String) {
@@ -83,7 +82,6 @@ class EcoTripViewModel(
 
     fun validarFormulario(): Boolean {
         val estado = _uiState.value
-        val dias = estado.diasDuracion.toIntOrNull()
 
         return when {
             estado.nombre.isBlank() -> {
@@ -93,11 +91,6 @@ class EcoTripViewModel(
 
             estado.destino.isBlank() -> {
                 mostrarError("Ingrese el destino del viaje")
-                false
-            }
-
-            dias == null || dias <= 0 -> {
-                mostrarError("Ingrese una duración válida en días")
                 false
             }
 

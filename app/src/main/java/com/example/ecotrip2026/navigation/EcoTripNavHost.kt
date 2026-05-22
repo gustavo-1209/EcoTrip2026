@@ -50,7 +50,7 @@ fun EcoTripNavHost(
                             ResumenRoute(
                                 nombre = estadoActual.nombre.trim(),
                                 destino = estadoActual.destino.trim(),
-                                diasDuracion = estadoActual.diasDuracion.toIntOrNull() ?: 0,
+                                diasDuracion = estadoActual.diasDuracion.toIntOrNull() ?: 1,
                                 tipoTransporte = estadoActual.tipoTransporte,
                                 huellaCarbonoActiva = estadoActual.huellaCarbonoActiva
                             )
